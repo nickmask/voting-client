@@ -1,4 +1,8 @@
-var webpack = require('webpack');
+var webpack = require('webpack')
+var Dashboard = require('webpack-dashboard')
+var DashboardPlugin = require('webpack-dashboard/plugin')
+var dashboard = new Dashboard()
+
 
 module.exports = {
   entry: [
@@ -22,10 +26,13 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist',
-    hot: true
+    contentBase: "./dist",
+    hot: true,
+    quiet: true,
+    historyApiFallback: true
   },
   plugins: [
+    new DashboardPlugin(dashboard.setData),
     new webpack.HotModuleReplacementPlugin()
   ]
 }
